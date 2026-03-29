@@ -1,0 +1,49 @@
+Чекори 12-13
+
+Команди:
+git checkout master
+git merge feature-search-books
+git log --oneline --graph --all
+
+Спојувањето резултираше со Fast-forward стратегија. Причината е што по креирањето на feature-search-books, на master не беше додаден ниту еден нов commit. Со тоа Git немаше потреба да создаде нов merge 
+commit - едноставно го поместил master покажувачот на последниот 
+commit од feature-search-books.
+
+git log --oneline --graph --all излез:
+* 3cac2fc (HEAD -> master, origin/feature-search-books, feature-search-books) Implement book search
+* 52cea78 (origin/master) Add starter code
+* f92bf79 Initial commit
+
+Чекор 21-22:
+Команди:
+git checkout feature-borrow-book
+git merge master
+git add SI2026Lab1Main.java
+git commit
+
+Настана конфликт во SI2026Lab1Main.java бидејќи истата линија беше променета на два различни начини: во feature-borrow-book пораката беше "Borrowed successfully.", додека на master беше "Book checked out.". 
+Конфликтот го решив со прифаќање на тековната промена (Current Change) односно задржување на "Borrowed successfully." од feature-borrow-book гранката.
+Употребената стратегија за спојување беше recursive merge.
+
+git status излез:
+On branch feature-borrow-book
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        226129.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+Чекор 23:
+Команди:
+git checkout master
+git merge feature-genre-report
+
+Спојувањето НЕ беше fast-forward туку recursive (ort) merge. 
+Причината е тоа што master имаше нов commit ("Update borrow message on master") откако беше креирана feature-genre-report гранката, па двете гранки дивергирале и Git мораше да создаде нов merge commit.
+
+Чекор 24:
+Команди:
+git merge feature-borrow-book
+
+Спојувањето беше recursive (ort) merge, не fast-forward. 
+Причината е тоа што master веќе имаше merge commit од feature-genre-report,додека feature-borrow-book имаше свои commits, па двете гранки дивергирале и Git создаде нов merge commit за да ги обедини.
